@@ -16,13 +16,13 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:$TAG ./app'
+                bat 'docker build -t $IMAGE_NAME:$TAG ./app'
             }
         }
 
         stage('Deploy to Minikube') {
             steps {
-                sh '''
+                bat '''
                 eval $(minikube docker-env)
 
                 docker build -t $IMAGE_NAME:$TAG ./app
@@ -34,8 +34,8 @@ pipeline {
 
         stage('Verify Deployment') {
             steps {
-                sh 'kubectl get pods'
-                sh 'kubectl get svc'
+                bat 'kubectl get pods'
+                bat 'kubectl get svc'
             }
         }
     }

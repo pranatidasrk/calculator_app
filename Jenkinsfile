@@ -10,7 +10,7 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-repo/calculator-app.git'
+                git 'https://github.com/pranatidasrk/calculator_app.git'
             }
         }
 

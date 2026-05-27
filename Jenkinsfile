@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = "calculator-app"
-        TAG = "v1"
+        TAG = "V1"
     }
 
     stages {

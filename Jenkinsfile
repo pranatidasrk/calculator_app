@@ -8,27 +8,18 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/pranatidasrk/calculator_app.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t %IMAGE_NAME:%TAG ./app'
+                bat 'docker build -t %IMAGE_NAME%:%TAG% .'
             }
         }
 
         stage('Deploy to Minikube') {
             steps {
-                bat '''
-                eval %(minikube docker-env)
 
-                docker build -t %IMAGE_NAME:$TAG ./app
+                bat 'minikube status'
 
-                helm upgrade --install calculator ./helm/calculator
-                '''
+                bat 'helm upgrade --install calculator ./helm/calculator'
             }
         }
 

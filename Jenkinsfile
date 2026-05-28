@@ -16,16 +16,16 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t $IMAGE_NAME:$TAG ./app'
+                bat 'docker build -t %IMAGE_NAME:%TAG ./app'
             }
         }
 
         stage('Deploy to Minikube') {
             steps {
                 bat '''
-                eval $(minikube docker-env)
+                eval %(minikube docker-env)
 
-                docker build -t $IMAGE_NAME:$TAG ./app
+                docker build -t %IMAGE_NAME:$TAG ./app
 
                 helm upgrade --install calculator ./helm/calculator
                 '''
